@@ -2,7 +2,10 @@
 name = "desiderata"
 version = "0.1.0"
 edition = "2021"
+author = "Tony Riemer <tonyrriemer@gmail.com>"
+description = "A simulation environment for Social Epistemology experiments, based on the Laputa framework"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+petgraph = "0.6.0"
