@@ -13,26 +13,27 @@
 //!
 
 use petgraph::graph::Graph;
-
-pub struct SimpleSociety {
-    pub network: Graph<i32, ()>,
-}
+// use crate::agent;
 
 pub trait Society {
     fn new(size: i32) -> Self;
 }
 
-impl Society for SimpleSociety {
+pub struct SimpleSociety<A> {
+    pub network: Option<Graph<A, ()>>,
+}
 
-    fn new(_size: i32) -> SimpleSociety {
-        // Create an undirected graph with `i32` nodes and edges with `()` associated data.
-        let g = Graph::<i32, ()>::from_edges(&[
-            (1, 2), 
-            (2, 3), 
-            (3, 4),
-            (1, 4),
-        ]);
-        SimpleSociety{ network: g }
+impl<A> Society for SimpleSociety<A> {
+
+    fn new(_size: i32) -> SimpleSociety<A> {
+        // Create an undirected graph with `A` (agent type) nodes and edges with `()` associated data.
+        // let g = Graph::<A, ()>::from_edges(&[
+        //     // (1, 2), 
+        //     // (2, 3), 
+        //     // (3, 4),
+        //     // (1, 4),
+        // ]);
+        SimpleSociety{ network: None }
     }
 }
 
