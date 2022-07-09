@@ -13,27 +13,26 @@
 //!
 
 use petgraph::graph::Graph;
+use std::collections::HashMap;
 // use crate::agent;
 
-pub trait Society {
-    fn new(size: i32) -> Self;
+pub trait Society<A> {
+    fn new(size: i32, initial_nodes: Vec<A>) -> Self;
 }
 
 pub struct SimpleSociety<A> {
-    pub network: Option<Graph<A, ()>>,
+    pub network: Graph<A, ()>,
 }
 
-impl<A> Society for SimpleSociety<A> {
+impl<A> Society<A> for SimpleSociety<A> {
 
-    fn new(_size: i32) -> SimpleSociety<A> {
+    fn new(_size: i32, initial_nodes: Vec<A>) -> SimpleSociety<A> {
         // Create an undirected graph with `A` (agent type) nodes and edges with `()` associated data.
-        // let g = Graph::<A, ()>::from_edges(&[
-        //     // (1, 2), 
-        //     // (2, 3), 
-        //     // (3, 4),
-        //     // (1, 4),
-        // ]);
-        SimpleSociety{ network: None }
+        let mut g = Graph::<A, ()>::new();
+        for node in initial_nodes {
+            g.add_node(node);
+        }
+        SimpleSociety{ network: g }
     }
 }
 

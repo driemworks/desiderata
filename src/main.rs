@@ -2,6 +2,7 @@
 //! Accept input, configure society, and execute the simulation
 
 use petgraph::dot::{Dot, Config};
+use std::collections::HashMap;
 
 mod society;
 mod agent;
@@ -28,7 +29,8 @@ fn main() {
     println!("* DESIDERATA *");
     println!("--------------");
     // build "society" with initial conditions
-    let society: SimpleSociety<SimpleAgent> = Society::new(10);
-    println!("{:?}", Dot::with_config(&society.network, &[Config::EdgeNoLabel]));
+    let initial_node_config: Vec<SimpleAgent> = Vec::new();
+    let society: SimpleSociety<SimpleAgent> = Society::<SimpleAgent>::new(10, initial_node_config);
+    // println!("{:?}", Dot::with_config(&society.network, &[Config::EdgeNoLabel]));
     run_simulation(society, 100);
 }
